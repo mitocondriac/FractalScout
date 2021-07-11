@@ -1,0 +1,9 @@
+*.meta
+Assets/AmplifyShaderEditor/
+Library/
+ProjectSettings/
+Temp/
+Packages/
+obj/
+Logs/
+UserSettings/
