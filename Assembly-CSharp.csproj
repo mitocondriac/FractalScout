@@ -41,15 +41,35 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\ProjectionScreen\MandelBoxEstimator.cs" />
-     <Compile Include="Assets\ProjectionScreen\TracerRenderer.cs" />
-     <Compile Include="Assets\LogPanel.cs" />
+     <Compile Include="Assets\UI\LogPanel.cs" />
      <Compile Include="Assets\Navigator.cs" />
+     <Compile Include="Assets\UI\MandelBoxEstimator.cs" />
+     <Compile Include="Assets\UI\HudController.cs" />
+     <Compile Include="Assets\UI\Indicator.cs" />
+     <Compile Include="Assets\ProjectionScreen\TracerRenderer.cs" />
      <Compile Include="Assets\Controllers\VirtualJoystick\VirtualJoystick.cs" />
      <Compile Include="Assets\Controllers\VirtualThrottle\VirtualThrottle.cs" />
+     <Compile Include="Assets\Unity UI Samples\Scripts\DropMe.cs" />
+     <Compile Include="Assets\Unity UI Samples\Scripts\ResizePanel.cs" />
+     <Compile Include="Assets\Unity UI Samples\Scripts\ShowSliderValue.cs" />
+     <Compile Include="Assets\Unity UI Samples\Scripts\ChangeColor.cs" />
+     <Compile Include="Assets\Unity UI Samples\Scripts\ActiveStateToggler.cs" />
+     <Compile Include="Assets\Unity UI Samples\Scripts\ScrollDetailTexture.cs" />
+     <Compile Include="Assets\Unity UI Samples\Scripts\PanelManager.cs" />
+     <Compile Include="Assets\Unity UI Samples\Scripts\DragPanel.cs" />
+     <Compile Include="Assets\Unity UI Samples\Scripts\DragMe.cs" />
+     <Compile Include="Assets\Unity UI Samples\Scripts\TiltWindow.cs" />
+     <Compile Include="Assets\Unity UI Samples\Scripts\ApplicationManager.cs" />
+     <Compile Include="Assets\UI\DistanceEstimatorPanel.cs" />
+     <Compile Include="Assets\Controllers\RudderController.cs" />
+     <Compile Include="Assets\MouseRotator.cs" />
+     <Compile Include="Assets\UI\AttitudeIndicator.cs" />
      <None Include="Assets\Shaders\screen.shader" />
+     <None Include="Assets\Unity UI Samples\Textures and Sprites\SF UI\Background\LICENSE.txt" />
+     <None Include="Assets\Unity UI Samples\Materials\UI-Default-No-Alpha.shader" />
      <None Include="Assets\Shaders\random.cginc" />
      <None Include="Assets\Shaders\gradient.cginc" />
+     <None Include="Assets\Unity UI Samples\Fonts\Jupiter\LICENSE.txt" />
      <None Include="Assets\Shaders\fog.cginc" />
      <None Include="Assets\Shaders\de.cginc" />
      <None Include="Assets\Shaders\sample.shader" />
@@ -287,6 +307,9 @@
      </Reference>
      <Reference Include="Newtonsoft.Json">
      <HintPath>C:/Workspace/Unity/Orthanc/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
+     <HintPath>C:/Workspace/Unity/Orthanc/Library/PackageCache/com.unity.visualscripting@1.6.1/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
      </Reference>
      <Reference Include="netstandard">
      <HintPath>C:/Program Files/Unity/Hub/Editor/2021.1.12f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
@@ -633,42 +656,59 @@
      <Reference Include="System.Xml.Serialization">
      <HintPath>C:/Program Files/Unity/Hub/Editor/2021.1.12f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.VSCode.Editor">
-     <HintPath>C:/Workspace/Unity/Orthanc/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+     <Reference Include="Unity.Rider.Editor">
+     <HintPath>C:/Workspace/Unity/Orthanc/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.TextMeshPro.Editor">
      <HintPath>C:/Workspace/Unity/Orthanc/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.VisualStudio.Editor">
-     <HintPath>C:/Workspace/Unity/Orthanc/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Timeline.Editor">
-     <HintPath>C:/Workspace/Unity/Orthanc/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+     <Reference Include="UnityEditor.UI">
+     <HintPath>C:/Workspace/Unity/Orthanc/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Timeline">
      <HintPath>C:/Workspace/Unity/Orthanc/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
      </Reference>
+     <Reference Include="Unity.VSCode.Editor">
+     <HintPath>C:/Workspace/Unity/Orthanc/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Timeline.Editor">
+     <HintPath>C:/Workspace/Unity/Orthanc/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualStudio.Editor">
+     <HintPath>C:/Workspace/Unity/Orthanc/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
+     </Reference>
      <Reference Include="Unity.TextMeshPro">
      <HintPath>C:/Workspace/Unity/Orthanc/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-     </Reference>
-     <Reference Include="UnityEditor.UI">
-     <HintPath>C:/Workspace/Unity/Orthanc/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
      </Reference>
      <Reference Include="Unity.PlasticSCM.Editor">
      <HintPath>C:/Workspace/Unity/Orthanc/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.Rider.Editor">
-     <HintPath>C:/Workspace/Unity/Orthanc/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
-     </Reference>
      <Reference Include="UnityEngine.UI">
      <HintPath>C:/Workspace/Unity/Orthanc/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
      </Reference>
+     <Reference Include="VSSettingsProvider">
+     <HintPath>C:/Workspace/Unity/Orthanc/Library/ScriptAssemblies/VSSettingsProvider.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.Core">
+     <HintPath>C:/Workspace/Unity/Orthanc/Library/ScriptAssemblies/Unity.VisualScripting.Core.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.Core.Editor">
+     <HintPath>C:/Workspace/Unity/Orthanc/Library/ScriptAssemblies/Unity.VisualScripting.Core.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.Flow">
+     <HintPath>C:/Workspace/Unity/Orthanc/Library/ScriptAssemblies/Unity.VisualScripting.Flow.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.Flow.Editor">
+     <HintPath>C:/Workspace/Unity/Orthanc/Library/ScriptAssemblies/Unity.VisualScripting.Flow.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.State">
+     <HintPath>C:/Workspace/Unity/Orthanc/Library/ScriptAssemblies/Unity.VisualScripting.State.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.State.Editor">
+     <HintPath>C:/Workspace/Unity/Orthanc/Library/ScriptAssemblies/Unity.VisualScripting.State.Editor.dll</HintPath>
+     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="AmplifyShaderEditor.csproj">
-      <Project>{63f0e6c0-7265-bb47-158d-08e097063f5f}</Project>
-      <Name>AmplifyShaderEditor</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

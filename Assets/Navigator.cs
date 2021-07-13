@@ -1,6 +1,7 @@
 using Controllers.VirtualJoystick;
-using Controllers.VirtualThrottle;
 using UnityEngine;
+using Slider = UnityEngine.UI.Slider;
+using Toggle = UnityEngine.UI.Toggle;
 
 public class Navigator : MonoBehaviour
 {
@@ -9,13 +10,14 @@ public class Navigator : MonoBehaviour
     public float PitchSensitivity;
     public float YawSensitivity;
     private Rigidbody body;
+    public float RotationInertia = 10f;
     public VirtualJoystick Joystick;
 
-    public VirtualJoystick Rudder;
+    public Slider Rudder;
 
-    public VirtualThrottle Throttle;
+    public Slider Throttle;
 
-    public bool Warp;
+    public Toggle Warp;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,15 +27,16 @@ public class Navigator : MonoBehaviour
 
     void FixedUpdate()
     {
-        var boost = (Warp) ? 1 : 0.1f;
-        body.AddForce(transform.forward * (Throttle.Throttle * Thrust * boost * Time.fixedDeltaTime));
+        var boost = (Warp.isOn) ? 1 : 0.1f;
+        body.AddForce(transform.forward * (Throttle.value * Thrust * boost * Time.fixedDeltaTime));
         body.AddRelativeTorque(new Vector3(Joystick.CurrentPosition.y * Time.fixedDeltaTime * PitchSensitivity,
-            Rudder.CurrentPosition.x * Time.fixedDeltaTime * YawSensitivity,
-            -Joystick.CurrentPosition.x * Time.fixedDeltaTime * RollSensitivity)*boost);
+            Rudder.value * Time.fixedDeltaTime * YawSensitivity,
+            -Joystick.CurrentPosition.x * Time.fixedDeltaTime * RollSensitivity)*boost/RotationInertia);
     }
     public string GetStats()
     {
         var eulerAngles = transform.eulerAngles;
-        return $"Speed: {body.velocity.magnitude}\nPitch: {eulerAngles.x}\nRoll: {eulerAngles.z}\nYaw: {eulerAngles.y}\nApplied Thrust: {Throttle.Throttle * Thrust}\nFPS:{1f/Time.deltaTime}";
+        return $"Speed: {body.velocity.magnitude}\nPitch: {eulerAngles.x}\nRoll: {eulerAngles.z}\nYaw: {eulerAngles.y}\nApplied Thrust: {Throttle.value * Thrust}\nFPS:{1f/Time.deltaTime}";
     }
+    
 }

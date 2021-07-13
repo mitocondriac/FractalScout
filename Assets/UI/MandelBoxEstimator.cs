@@ -1,23 +1,26 @@
 ﻿using System;
+using ProjectionScreen;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace ProjectionScreen
+namespace UI
 {
     public class MandelBoxEstimator:MonoBehaviour
     {
+        private DistanceEstimatorPanel distanceEstimatorPanel;
 
-        private TracerRenderer m_tracer;
+        public TracerRenderer tracer;
 
         void Start()
         {
-            m_tracer = GetComponent<TracerRenderer>();
+            distanceEstimatorPanel = GetComponent<DistanceEstimatorPanel>();
         }
 
         private float De(Vector3 pos)
         {
-            var tscale = m_tracer.Scale;
-            float iterations = m_tracer.Iterations;
-            var minRad2 = m_tracer.MinRad2;
+            var tscale = tracer.Scale;
+            float iterations = 16;
+            var minRad2 = tracer.MinRad2;
             
             var absScalem1 = Math.Abs(tscale - 1.0f);
             var absScaleRaisedTo1MIters = Mathf.Pow(Math.Abs(tscale), (1.0f-iterations));
@@ -59,7 +62,7 @@ namespace ProjectionScreen
         {
             var t = 0f;
             var i = 0;
-            while (i < 32)
+            while (i < 16)
             {
                 var p = r.origin + r.direction * t;
                 var d = De(p);
@@ -81,7 +84,11 @@ namespace ProjectionScreen
             {
                 //create a ray cast and set it to the mouses cursor position in game
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                Debug.Log(Distance(ray));
+                var d = Distance(ray);
+                if (d > 0.0f)
+                {
+                    distanceEstimatorPanel.ShowBrackets(Input.mousePosition,d);
+                }
             }
         }
     }

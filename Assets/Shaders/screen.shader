@@ -67,10 +67,14 @@ Shader "screen"
 			return LightColor * dot(dir, normal);
 		}
 
-		float3 getmaterial(float3 dir, float3 normal, float3 orbit) {
-
+		float3 getmaterial(float3 dir, float3 normal, float3 orbit)
+		{
+			float rt = orbit.x %1.0;
+			float gt = orbit.y %1.0;
+			float bt = orbit.z %1.0;
+			float3 t = float3(rt,gt,bt);
 			const float c = clamp(-dot(dir, normal), 0, 1);
-			return lerp(MinColor, MaxColor, length(orbit))*c;
+			return lerp(MinColor, MaxColor, t)*c;
 		}
 
 		float3 trace(float3 pos, float3 dir)
@@ -81,11 +85,13 @@ Shader "screen"
 			float inv = 1.0/float(TracerIterations);
 			float3 p;
 			float fSteps = 0;
+			float oLastLen = 0;
 			for (int i = 0;i<TracerIterations;i++) {
 				p = pos + dir * t;
 
 				const float d = de(p, orbit);
-				fSteps += t/(d);
+				const float oLen = length(orbit);
+				fSteps += (oLen+oLastLen)*0.5/(d);
 
 				if (d < Threshold) {
 					p = pos + dir * (t - Threshold*0.5);
@@ -93,18 +99,19 @@ Shader "screen"
 					const float3 material = getmaterial(dir, n, orbit);
 					const float3 l1 = getLight(p, LightPos, n) ;
 					const float3 l2 = getLight(p, SpotLight, n) ;
-					const float3 glow = clamp(GlowColor*GlowMax*fSteps/MaxDistance, float3(0,0,0),float3(1,1,1));
+					const float3 glow = clamp(GlowColor*GlowMax*fSteps, float3(0,0,0),float3(1,1,1));
 					float3 col = (DiffuseLightColor*clamp(1.0-occ*OcclusionEffect,float3(0,0,0),float3(1,1,1)) + l1 + l2) * material;
-					return lerp(clamp(col+glow,float3(0,0,0),float3(1,1,1)), FogAmount(pos,p)*(SkyColor), 1.0-exp(-(t)*FogIntensity));
+					return lerp(FogAmount(pos,p)*(SkyColor),clamp(col+glow,float3(0,0,0),float3(1,1,1)),  1.0-exp(-(t)*FogIntensity));
 				}
 				t += d;
 				occ += d*i*inv/t;
 				i++;
+				oLastLen = oLen;
 				if (t > MaxDistance) break;
 			}
-			const float3 glow = clamp(GlowColor*GlowMax*fSteps/MaxDistance, float3(0,0,0),float3(1,1,1));
+			const float3 glow = clamp(GlowColor*GlowMax*fSteps, float3(0,0,0),float3(1,1,1));
 			//return clamp(FogAmount(pos,p)*SkyColor + glow,float3(0,0,0),float3(1,1,1));
-			return lerp(clamp(glow,0,1), FogAmount(pos,p)*SkyColor, 1.0-exp(-(t)*FogIntensity));
+			return lerp(FogAmount(pos,p)*SkyColor,clamp(glow,0,1), 1.0- exp(-(t)*FogIntensity));
 
 
 

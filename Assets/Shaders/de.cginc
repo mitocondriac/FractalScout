@@ -9,6 +9,7 @@ float de(float3 pos, inout float3 orbit) {
 	const float4 p0 = p;
 	const float4 scale = float4(Scale, Scale, Scale, abs(Scale)) / MinRad2;
 	float xf = 0.0;
+	float oLen = 1000000.0;
 	for (int i = 0; i < Iterations; i++)
 	{
 		const float3 tmp = clamp(p.xyz, -float3(1, 1, 1), float3(1, 1, 1)) * 2.0 - p.xyz;  // min;max;mad
@@ -18,8 +19,12 @@ float de(float3 pos, inout float3 orbit) {
 		xf += r2;
 		p *= clamp(max(MinRad2 / r2, MinRad2), 0.0, 1.0);  // dp3,div,max.sat,mul
 		p = float4(p.x * scale.x, p.y * scale.y, p.z * scale.z, p.w * scale.w) + p0;
-		orbit = min(orbit, abs(p));
-
+		float ol = length(orbit);
+		if (ol<oLen)
+		{
+			orbit = abs(p);
+			oLen=ol;
+		}
 		if (r2 > 1000.0) break;
 
 	}

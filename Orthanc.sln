@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{f1d0d937-b3e1-ee38-35dc-fa76fa5d1a89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmplifyShaderEditor", "AmplifyShaderEditor.csproj", "{63f0e6c0-7265-bb47-158d-08e097063f5f}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,8 +10,6 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{f1d0d937-b3e1-ee38-35dc-fa76fa5d1a89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{f1d0d937-b3e1-ee38-35dc-fa76fa5d1a89}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{63f0e6c0-7265-bb47-158d-08e097063f5f}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{63f0e6c0-7265-bb47-158d-08e097063f5f}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
