@@ -1372,9 +1372,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2077118613}
     - target: {fileID: 1870301695, guid: 8043364ef889d9e429c5a96d67fc288b, type: 3}
+      propertyPath: Size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1870301695, guid: 8043364ef889d9e429c5a96d67fc288b, type: 3}
       propertyPath: Light
       value: 
       objectReference: {fileID: 508082687}
+    - target: {fileID: 1870301695, guid: 8043364ef889d9e429c5a96d67fc288b, type: 3}
+      propertyPath: CSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1870301695, guid: 8043364ef889d9e429c5a96d67fc288b, type: 3}
+      propertyPath: CSize.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1870301695, guid: 8043364ef889d9e429c5a96d67fc288b, type: 3}
+      propertyPath: CSize.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1870301695, guid: 8043364ef889d9e429c5a96d67fc288b, type: 3}
+      propertyPath: DEoffset
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 1870301695, guid: 8043364ef889d9e429c5a96d67fc288b, type: 3}
       propertyPath: SpotLight
       value: 

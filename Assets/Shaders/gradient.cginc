@@ -1,5 +1,6 @@
 ﻿
-#include "de.cginc"
+#include "deKleinian.cginc"
+//#include "deMandelBox.cginc"
 
 float3 gradient(float3 pos, float normalDistance)
 {

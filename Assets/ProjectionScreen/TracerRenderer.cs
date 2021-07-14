@@ -16,8 +16,7 @@ namespace ProjectionScreen
         public Color DiffuseLightColor;
         public float FogIntensity;
         public float Threshold;
-        public float MinRad2;
-        public float Scale;
+
         public float MaxDistance;
         public float GlowMax;
         public float OcclusionEffect;
@@ -25,6 +24,21 @@ namespace ProjectionScreen
         public int TracerIterations;
         public Navigator Nav;
         private Camera m_c;
+
+        /// <summary>
+        /// Mandelbox parameters
+        /// </summary>
+        public float MinRad2;
+        public float Scale;
+        
+        /// <summary>
+        /// Kleinian parameters
+        /// </summary>
+        public float Size;
+        public float DEoffset;
+        public Vector3 CSize;
+        public Vector3 C;
+        public Vector3 Offset;
 
         void Start()
         {
@@ -50,8 +64,7 @@ namespace ProjectionScreen
             Mat.SetVector("CamDir", m_c.transform.forward);
             Mat.SetVector("CamPos", position);
 
-            Mat.SetFloat("MinRad2",MinRad2);
-            Mat.SetFloat("Scale",Scale);
+
             Mat.SetFloat("Threshold", Threshold);
             Mat.SetInteger("Iterations", Iterations);
             Mat.SetInteger("TracerIterations", TracerIterations);
@@ -67,6 +80,15 @@ namespace ProjectionScreen
             Mat.SetFloat("MaxDistance", MaxDistance);
             Mat.SetFloat("OcclusionEffect", OcclusionEffect);
             Mat.SetFloat("GlowMax", GlowMax);
+            
+            Mat.SetFloat("MinRad2",MinRad2);
+            Mat.SetFloat("Scale",Scale);
+            
+            Mat.SetFloat("Size",Size);
+            Mat.SetFloat("DEoffset",DEoffset);
+            Mat.SetVector("CSize", CSize);
+            Mat.SetVector("C", C);
+            Mat.SetVector("Offset", Offset);
 
         }
     }
